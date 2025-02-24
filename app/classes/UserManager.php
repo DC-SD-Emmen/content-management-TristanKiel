@@ -29,8 +29,12 @@ class UserManager() {
         $username = htmlspecialchars($data['username']);
         $password = htmlspecialchars($data['password']);
 
-        $usernameregex = '/[A-Z][a-z][0-9]/';
+        $usernameregex = '/?([A-Z]*[a-z]*[0-9]*)/';
         $passwordregex = '/?([A-Z]*[a-z]*[0-9]*)/';
+
+        $UserManager = new UserManager();
+        $UserManager->setUserName($username);
+        $UserManager->setPassword($password);
     }
 
 }

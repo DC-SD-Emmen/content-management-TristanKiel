@@ -16,21 +16,17 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         //usermanager->insertUser oproepen
+        $userManager->insertUser();
     }
 ?>
 
-    <form method="post">
+    <form action="UserManager.php" method="post">
         <label for="uname"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="uname" required> 
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
         <input type="submit">
     </form>
-
-
-<?php
-   
-?>
 
 
 </body>
