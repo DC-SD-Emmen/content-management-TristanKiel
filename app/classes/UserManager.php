@@ -21,10 +21,16 @@ class UserManager() {
 
         //en dan met mysql de boel naar de database sturen
 
-        $stmt = $conn->prepare("INSERT INTO users (id, username, password)");
-        $stmt->bindparam($id);
+        $stmt = $conn->prepare("INSERT INTO users (username, password)");
         $stmt->bindparam($username);
         $stmt->bindparam($password);
+        $stmt->execute();
+
+        $username = htmlspecialchars($data['username']);
+        $password = htmlspecialchars($data['password']);
+
+        $usernameregex = '/[A-Z][a-z][0-9]/';
+        $passwordregex = '/?([A-Z]*[a-z]*[0-9]*)/';
     }
 
 }
