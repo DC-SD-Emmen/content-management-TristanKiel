@@ -1,18 +1,25 @@
-<?php
-
-$host = "mysql"; // Le host est le nom du service, présent dans le docker-compose.yml
-$dbname = "my-wonderful-website";
-$charset = "utf8";
-$port = "3306";
-?>
-
 <html>
 <head>
     <title>Drenthe College docker web server</title>
 </head>
 <body>
 
-    <form action="submit.php" method="post">
+<?php
+
+    spl_autoload_register(function ($class_name) {
+        include './classes/' . $class_name . '.php';
+    });
+
+    $db = new Database();
+    $userManager = new UserManager($db->getConnection());
+    
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        //usermanager->insertUser oproepen
+    }
+?>
+
+    <form method="post">
         <label for="uname"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="uname" required> 
         <label for="psw"><b>Password</b></label>
@@ -20,6 +27,10 @@ $port = "3306";
         <input type="submit">
     </form>
 
+
+<?php
+   
+?>
 
 
 </body>
