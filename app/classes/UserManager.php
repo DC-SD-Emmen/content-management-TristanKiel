@@ -32,9 +32,20 @@ class UserManager() {
         $usernameregex = '/?([A-Z]*[a-z]*[0-9]*)/';
         $passwordregex = '/?([A-Z]*[a-z]*[0-9]*)/';
 
-        $UserManager = new UserManager();
+        if (!preg_match($usernameregex, $username)) {
+            echo("error");
+        }
+
+        if (!preg_match($passwordregex, $password)) {
+            echo("error");
+        }
+
+        $hashedPassword = password_hash($password);
+
+        $stmt = $this->conn->prepare("INSERT INTO users (username, password");
         $UserManager->setUserName($username);
         $UserManager->setPassword($password);
+        $stmt->execute();
     }
 
 }
