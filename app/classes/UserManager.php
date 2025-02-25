@@ -9,6 +9,20 @@ class UserManager() {
         $this->conn = $db;   
     }
 
+    public function select(){
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM users");
+            $stmt->execute();
+            $resultaten = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $resultaten = $stmt->fetchALl();
+            return $resultaten;
+        }
+        catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            $resultaten = [];
+        }
+    }
+
 
     public function insertUser() {
         
