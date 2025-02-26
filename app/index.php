@@ -15,12 +15,15 @@
     
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        $user = $_POST['uname'];
+        $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
+
         //usermanager->insertUser oproepen
-        $userManager->insertUser();
+        $userManager->insertUser($user, $password);
     }
 ?>
 
-    <form action="UserManager.php" method="post">
+    <form method="post">
         <label for="uname"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="uname" required> 
         <label for="psw"><b>Password</b></label>

@@ -1,7 +1,7 @@
 <?php
 
 
-class UserManager() {
+class UserManager {
 
     private $conn;
 
@@ -24,42 +24,35 @@ class UserManager() {
     }
 
 
-    public function insertUser() {
+    public function insertUser($user, $password) {
         
 
         //regex controle doen
         //htmlspecials eventueel toepassen waar nodig
+        $username = htmlspecialchars($user);
 
-        //password hashing om het wachtwoord eerst te hashen voordat je hem naar de database stuurt
+        $usernameregex = '/[A-Z][a-z]*/';
 
-
-        //en dan met mysql de boel naar de database sturen
-
-        $stmt = $conn->prepare("INSERT INTO users (username, password)");
-        $stmt->bindparam($username);
-        $stmt->bindparam($password);
-        $stmt->execute();
-
-        $username = htmlspecialchars($data['username']);
-        $password = htmlspecialchars($data['password']);
-
-        $usernameregex = '/?([A-Z]*[a-z]*[0-9]*)/';
-        $passwordregex = '/?([A-Z]*[a-z]*[0-9]*)/';
+        // $passwordregex = '/?([A-Z]*[a-z]*[0-9]*)/';
 
         if (!preg_match($usernameregex, $username)) {
             echo("error");
         }
 
-        if (!preg_match($passwordregex, $password)) {
-            echo("error");
+        // if (!preg_match($passwordregex, $password)) {
+        //     echo("error");
+        // }
+
+        try {
+            $stmt = $this->conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $password);
+            $stmt->execute();
+            echo "New data created successfully";
+        }   
+        catch (PDOException $e) {
+            echo $e->getMessage();
         }
-
-        $hashedPassword = password_hash($password);
-
-        $stmt = $this->conn->prepare("INSERT INTO users (username, password");
-        $UserManager->setUserName($username);
-        $UserManager->setPassword($password);
-        $stmt->execute();
     }
 
 }
