@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html>
 <head>
     <title>Drenthe College docker web server</title>
@@ -17,7 +20,7 @@
 
         $user = $_POST['uname'];
         $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
-        $verified_password = password_verify($_POST['psw'], $password);
+        
 
         //usermanager->insertUser oproepen
         $userManager->insertUser($user, $password);
@@ -41,6 +44,14 @@
             <button type="submit">Login</button>
         </form>
     </div>
+<?php
+    if (password_verify($_POST['psw'], $password)) {
+        echo "Wachtwoord is goed.";
+    }
+    else {
+        echo "Wachtwoord is niet goed.";
+    }
+?>
 
 
 </body>
