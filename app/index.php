@@ -17,6 +17,7 @@
 
         $user = $_POST['uname'];
         $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
+        $verified_password = password_verify($_POST['psw'], $password);
 
         //usermanager->insertUser oproepen
         $userManager->insertUser($user, $password);
@@ -30,6 +31,16 @@
         <input type="password" placeholder="Enter Password" name="psw" required>
         <input type="submit">
     </form>
+
+    <div id="container">
+        <form method="post">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 
 
 </body>
