@@ -18,12 +18,29 @@ session_start();
     
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $user = $_POST['uname'];
-        $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
-        
+        //if isset register, betekend Als er op de register submit knop is gedrukt
+        if(isset($_POST['register'])) {
+            $user = $_POST['uname'];
+            $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
+            
+            //usermanager->insertUser oproepen
+            $userManager->insertUser($user, $password);
+        }
 
-        //usermanager->insertUser oproepen
-        $userManager->insertUser($user, $password);
+       
+        // als er op de submit knop voor login is gedrukt
+        if(isset($_POST['login'])) {
+            if (password_verify($_POST['psw'], $password)) {
+                echo "Wachtwoord is goed.";
+            }
+            else {
+                echo "Wachtwoord is niet goed.";
+            }
+
+            $_SESSION["username"] = $_POST['uname'];
+            $_SESSION["password"] = $_POST['psw'];
+
+        }
     }
 ?>
 
@@ -32,26 +49,18 @@ session_start();
         <input type="text" placeholder="Enter Username" name="uname" required> 
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
-        <input type="submit">
+        <input type="submit" name='register' value="Register">
     </form>
 
     <div id="container">
-        <form method="post">
+        <form action="UserManager.php" method="post">
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="uname" required>
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
-            <button type="submit">Login</button>
+            <input type="submit" name='login' value="Login">
         </form>
     </div>
-<?php
-    if (password_verify($_POST['psw'], $password)) {
-        echo "Wachtwoord is goed.";
-    }
-    else {
-        echo "Wachtwoord is niet goed.";
-    }
-?>
 
 
 </body>
