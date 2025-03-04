@@ -1,5 +1,6 @@
 <html>    
-<body>    
+<body>   
+    <h1>Inlog Pagina</h1> 
 <?php
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {

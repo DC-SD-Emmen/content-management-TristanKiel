@@ -18,7 +18,7 @@
         }
     }
 ?>
-    <form method="post">
+    <form action="inlog.php" method="post">
         <input type="submit" name='logout' value="Logout">
     </form>
 </body>
