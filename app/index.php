@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <html>
 <head>
     <title>Drenthe College docker web server</title>
@@ -44,7 +41,7 @@ session_start();
     }
 ?>
 
-    <form method="post">
+    <form action="inlog.php" method="post">
         <label for="uname"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="uname" required> 
         <label for="psw"><b>Password</b></label>
@@ -52,15 +49,7 @@ session_start();
         <input type="submit" name='register' value="Register">
     </form>
 
-    <div id="container">
-        <form action="UserManager.php" method="post">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-            <input type="submit" name='login' value="Login">
-        </form>
-    </div>
+
 
 
 </body>

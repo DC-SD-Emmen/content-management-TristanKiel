@@ -1,18 +1,21 @@
 <?php
-session_start();
+    session_start();
 
-if (!isset($_SESSION['username'])) {
-    session_destroy();
-}
-elseif (!isset($_SESSION['password'])) {
-    session_destroy();
-}
+    if (!isset($_SESSION['username'])) {
+        session_destroy();
+    }
+    elseif (!isset($_SESSION['password'])) {
+        session_destroy();
+    }
 ?>
 <html>
 <body>
 <?php
-    if(isset($_POST['logout'])) {
-        session_destroy();
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if(isset($_POST['logout'])) {
+            session_unset();
+            session_destroy();
+        }
     }
 ?>
     <form method="post">
