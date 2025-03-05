@@ -1,13 +1,15 @@
 <?php
     session_start();
-
-    if (!isset($_SESSION['username'])) {
-        session_destroy();
-    }
 ?>
 <html>
 <body>
 <?php
+
+    
+    if (!isset($_SESSION['username'])) {
+        session_destroy();
+    }
+
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(isset($_POST['logout'])) {
             session_unset();

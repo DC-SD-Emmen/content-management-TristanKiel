@@ -25,14 +25,12 @@ class UserManager {
 
     public function selectUser(){
         try{
-            $stmt = $this->conn->prepare("SELECT * FROM users WHERE username=$username")
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE username=$username");
             $stmt->execute();
-            $resultaten = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            return $resultaten;
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
-            $resultaten = [];
         }
     }
 

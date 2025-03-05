@@ -6,6 +6,10 @@
     <h1>Inlog pagina</h1> 
 <?php
 
+    spl_autoload_register(function ($class_name) {
+        include './classes/' . $class_name . '.php';
+    });
+
     $db = new Database();
     $userManager = new UserManager($db->getConnection());
 
@@ -14,12 +18,7 @@
     
         // als er op de submit knop voor login is gedrukt
         if(isset($_POST['login'])) {
-            if (password_verify($_POST['psw'], $password)) {
-                echo "Wachtwoord is goed.";
-            }
-            else {
-                echo "Wachtwoord is niet goed.";
-            }
+            (password_verify($_POST['psw'], $password));
 
             $_SESSION["username"] = $_POST['uname'];
 
