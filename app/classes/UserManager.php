@@ -23,6 +23,19 @@ class UserManager {
         }
     }
 
+    public function selectUser(){
+        try{
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE username=$username")
+            $stmt->execute();
+            $resultaten = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            return $resultaten;
+        }
+        catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            $resultaten = [];
+        }
+    }
+
 
     public function insertUser($user, $password) {
         

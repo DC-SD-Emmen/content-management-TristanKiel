@@ -1,7 +1,13 @@
+<?php
+    session_start();
+?>
 <html>    
 <body>   
-    <h1>Inlog Pagina</h1> 
+    <h1>Inlog pagina</h1> 
 <?php
+
+    $db = new Database();
+    $userManager = new UserManager($db->getConnection());
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -16,7 +22,6 @@
             }
 
             $_SESSION["username"] = $_POST['uname'];
-            $_SESSION["password"] = $_POST['psw'];
 
         }
     }

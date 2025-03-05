@@ -1,8 +1,12 @@
+<?php
+    session_start();
+?>
 <html>
 <head>
     <title>Drenthe College docker web server</title>
 </head>
 <body>
+    <h1>Registratie pagina</h1>
 
 <?php
 

@@ -4,9 +4,6 @@
     if (!isset($_SESSION['username'])) {
         session_destroy();
     }
-    elseif (!isset($_SESSION['password'])) {
-        session_destroy();
-    }
 ?>
 <html>
 <body>
