@@ -1,14 +1,5 @@
 <?php
     session_start();
-?>
-<html>
-<head>
-    <title>Drenthe College docker web server</title>
-</head>
-<body>
-    <h1>Registratie pagina</h1>
-
-<?php
 
     spl_autoload_register(function ($class_name) {
         include './classes/' . $class_name . '.php';
@@ -31,7 +22,14 @@
     }
 ?>
 
-    <form action="inlog.php" method="post">
+<html>
+<head>
+    <title>Drenthe College docker web server</title>
+</head>
+<body>
+    <h1>Registratie pagina</h1>
+
+    <form method="post">
         <label for="uname"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="uname" required> 
         <label for="psw"><b>Password</b></label>

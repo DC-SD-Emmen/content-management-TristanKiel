@@ -22,10 +22,11 @@ class UserManager {
             $resultaten = [];
         }
     }
-    
-    public function insertUser($user, $password) {
-        
 
+    
+
+
+    public function insertUser($user, $password) {
         //regex controle doen
         //htmlspecials eventueel toepassen waar nodig
         $username = htmlspecialchars($user);
@@ -41,11 +42,25 @@ class UserManager {
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $password);
             $stmt->execute();
-            echo "New data created successfully";
+
+            header('Location: inlog.php');
         }   
         catch (PDOException $e) {
             echo $e->getMessage();
         }
+    }
+
+
+
+    public function getUser($username){
+
+        $stmt = $this->conn->prepare ("SELECT * FROM users WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch as an associative array
+
+        return $user ?: null; // Return null if no user found
+        
     }
 
 }
