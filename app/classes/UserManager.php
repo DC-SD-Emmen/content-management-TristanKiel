@@ -22,19 +22,7 @@ class UserManager {
             $resultaten = [];
         }
     }
-
-    public function selectUser(){
-        try{
-            $stmt = $this->conn->prepare("SELECT * FROM users WHERE username=$username");
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
-
+    
     public function insertUser($user, $password) {
         
 
@@ -44,15 +32,9 @@ class UserManager {
 
         $usernameregex = '/[A-Z][a-z]*/';
 
-        // $passwordregex = '/?([A-Z]*[a-z]*[0-9]*)/';
-
         if (!preg_match($usernameregex, $username)) {
             echo("error");
         }
-
-        // if (!preg_match($passwordregex, $password)) {
-        //     echo("error");
-        // }
 
         try {
             $stmt = $this->conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");

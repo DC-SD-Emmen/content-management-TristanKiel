@@ -27,21 +27,7 @@
             //usermanager->insertUser oproepen
             $userManager->insertUser($user, $password);
         }
-
-       
-        // als er op de submit knop voor login is gedrukt
-        if(isset($_POST['login'])) {
-            if (password_verify($_POST['psw'], $password)) {
-                echo "Wachtwoord is goed.";
-            }
-            else {
-                echo "Wachtwoord is niet goed.";
-            }
-
-            $_SESSION["username"] = $_POST['uname'];
-            $_SESSION["password"] = $_POST['psw'];
-
-        }
+        
     }
 ?>
 

@@ -19,9 +19,7 @@
         // als er op de submit knop voor login is gedrukt
         if(isset($_POST['login'])) {
             (password_verify($_POST['psw'], $password));
-
             $_SESSION["username"] = $_POST['uname'];
-
         }
     }
 
