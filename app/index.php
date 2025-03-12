@@ -36,9 +36,5 @@
         <input type="password" placeholder="Enter Password" name="psw" required>
         <input type="submit" name='register' value="Register">
     </form>
-
-
-
-
 </body>
 </html>

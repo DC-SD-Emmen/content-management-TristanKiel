@@ -24,6 +24,7 @@
                 if(password_verify($password, $user['password'])) {
 
                     $_SESSION['username'] = $userName;
+                    $_SESSION['userid'] = $user['id'];
 
                     header('Location: beveiligdepagina.php');
                 } else {
@@ -33,8 +34,7 @@
                 echo "User not found!";
             }
 
-            // (password_verify($_POST['psw'], $password));
-            // $_SESSION["username"] = $_POST['uname'];
+            
         }
     }
 
