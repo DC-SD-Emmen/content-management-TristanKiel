@@ -1,0 +1,14 @@
+body {
+    background-color: darkblue;
+    color: antiquewhite;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-left: 20px;
+    text-shadow: 2px 2px black;
+}
+
+.game-image {
+    width: 200px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}

@@ -26,7 +26,7 @@
                     $_SESSION['username'] = $userName;
                     $_SESSION['userid'] = $user['id'];
 
-                    header('Location: beveiligdepagina.php');
+                    header('Location: index.php');
                 } else {
                     echo "Login not succesfull! try again";
                 }
