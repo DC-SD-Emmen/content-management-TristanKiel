@@ -19,13 +19,6 @@
     } else {
         echo "Hello " . $_SESSION['username'] . "!<br>";
     }
-
-
-    
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,12 +33,6 @@
 <h1>Game Library</h1>
     
 <?php
-    
-
-    //spl autoloader
-    spl_autoload_register(function ($class_name) {
-        include 'classes/' . $class_name . '.php';
-    });
 
     $db = new Database();
     
@@ -55,11 +42,7 @@
 
     $kptb = new Koppeltabel($db->getConnection());
 
-    $gameTitles = $kptb->selectGames($_SESSION['userid']);
-
-    foreach($gameTitles as $gameTitle) {
-        echo $gameTitle['title'] . "<br>";
-    }
+    
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -94,30 +77,24 @@
         <input type='submit' name='submit' value="Versturen">
     </form>
 
-    <form method="post">
-        <input type="submit" name='logout' value="Logout">
-    </form>
+    
 
     <div id='games-container'>
 
-        <?php 
-        
-            $games = $gameManager->selectAll();
+        <?php
+            $games = $gameManager->selectAll($_SESSION['userid']);
 
             foreach($games as $game) {
                 echo "<a href='detailpagina.php?id=" . $game['id'] ."'> <img class='game-image' src='uploads/" . $game['image'] . "'></a><br>";
             }
-
-
         ?>
 
 
     </div>
 
-    
-
-
-
+    <form method="post">
+        <input type="submit" name='logout' value="Logout">
+    </form>
 
     <script src='javascript.js'></script>
 
