@@ -17,7 +17,7 @@
         session_destroy();
         header("Location: inlog.php");
     } else {
-        echo "Hello " . $_SESSION['username'] . "!<br>";
+        echo "Hallo " . $_SESSION['username'] . "!<br>";
     }
 ?>
 <!DOCTYPE html>
@@ -30,27 +30,31 @@
 </head>
 <body>
 
-<h1>Game Library</h1>
+    <h1>Game Library</h1>
     
-<?php
+    <?php
 
-    $db = new Database();
-    
-    $userManager = new UserManager($db->getConnection());
+        $db = new Database();
+        
+        $userManager = new UserManager($db->getConnection());
 
-    $gameManager = new GameManager($db->getConnection());
+        $gameManager = new GameManager($db->getConnection());
 
-    $kptb = new Koppeltabel($db->getConnection());
+        $kptb = new Koppeltabel($db->getConnection());
 
-    
+        
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $gameManager->fileUpload($_FILES['image']);
+            $gameManager->fileUpload($_FILES['image']);
 
-        $gameManager->insert($_POST, $_FILES['image']['name']);
-    }  
-?>
+            $gameManager->insert($_POST, $_FILES['image']['name']);
+        }  
+    ?>
+
+    <form action="wishlist.php" method="post">
+        <input type="submit" name='wishlist' value="Wensenlijst">
+    </form>
 
     <button id='add-button'>ADD</button>
 

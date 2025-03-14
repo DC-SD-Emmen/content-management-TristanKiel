@@ -14,7 +14,7 @@
         }
 
         public function selectGames($user_id){
-            $stmt = $this->conn->prepare("SELECT games.title
+            $stmt = $this->conn->prepare("SELECT games.image
                                         FROM games
                                         INNER JOIN user_games ON games.id = user_games.game_id
                                         WHERE user_games.user_id = :user_id;");
