@@ -1,14 +1,94 @@
 body {
     background-color: darkblue;
-    color: antiquewhite;
+    color: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    margin-left: 20px;
+    box-sizing: border-box;
     text-shadow: 2px 2px black;
 }
 
+h1 {
+    color: gold;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="file"],
+input[type="date"],
+input[type="number"] {
+    background-color: darkgray;
+    border: 2px solid;
+    border-radius: 5px;
+    color: ghostwhite;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    width: 400px;
+}
+
+input[type="submit"] {
+    background-color: greenyellow;
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+    width: 400px;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+    background-color: #2ecc71;
+}
+
+button {
+    background-color: cyan;
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: dodgerblue;
+}
+
+#games-container {
+    display: grid;
+    padding: 20px;
+}
+
+
 .game-image {
     width: 200px;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
+    border-radius: 5px;
+    border: 2px solid gray;
+}
+
+#game-title,
+#game-genre,
+#game-platform,
+#game-release_year,
+#game-rating {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: orange;
+}
+
+#game-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#game-rating {
+    color: red;
+    font-weight: bold;
 }
