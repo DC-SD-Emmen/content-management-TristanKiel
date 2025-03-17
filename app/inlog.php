@@ -60,6 +60,10 @@
             <input type="password" placeholder="Enter Password" name="psw" required>
             <input type="submit" name='login' value="Login">
         </form>
+        <form action="registratie.php">
+            Als je nog geen account hebt, dan kun je je registreren:
+            <input type="submit" name="register" value="Registreer">
+        </form>    
     </div>
 
 

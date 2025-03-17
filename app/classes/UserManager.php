@@ -34,7 +34,7 @@
             $usernameregex = '/[A-Z][a-z]*/';
 
             if (!preg_match($usernameregex, $username)) {
-                echo("error");
+                echo("Je hebt geen geldige username ingevuld");
             }
 
             try {
