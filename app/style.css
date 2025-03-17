@@ -32,8 +32,6 @@ input[type="number"] {
     padding: 10px;
     margin: 10px;
     width: 400px;
-    display: grid;
-    grid-template-columns: auto;
 }
 
 input[type="submit"] {
@@ -93,4 +91,11 @@ button:hover {
 #game-rating {
     color: red;
     font-weight: bold;
+}
+
+@media (max-width: 800px) {
+    form {
+        display: grid;
+        grid-template-columns: auto;
+    }
 }

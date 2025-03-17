@@ -62,13 +62,14 @@
             return $user ?: null; // Return null if no user found
             
         }
-
         
         public function deleteUsers($id){
-            $stmt = $this->conn->prepare("DELETE FROM users WHERE id=$id");
+            $stmt = $this->conn->prepare("DELETE FROM user_games WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $id);
+            $stmt->execute();
+            $stmt = $this->conn->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
         }
-
     }
-
 ?>
