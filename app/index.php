@@ -5,11 +5,25 @@
         include './classes/' . $class_name . '.php';
     });
 
+    $db = new Database();   
+    $userManager = new UserManager($db->getConnection());
+    $gameManager = new GameManager($db->getConnection());
+    $kptb = new Koppeltabel($db->getConnection());
+
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
         if(isset($_POST['logout'])) {
             session_unset();
             session_destroy();
             header("Location: inlog.php");
+        } 
+        else if(isset($_POST['userDelete'])){
+            $userManager->deleteUsers($_SESSION['userid']);
+            header("Location: inlog.php");
+        } 
+        else if(isset($_POST['add-game'])) {
+            $gameManager->fileUpload($_FILES['image']);
+            $gameManager->insert($_POST, $_FILES['image']['name']);
         }
     }
     
@@ -33,22 +47,11 @@
     <h1>Game Library</h1>
     
     <?php
-
-        $db = new Database();
-        
-        $userManager = new UserManager($db->getConnection());
-
-        $gameManager = new GameManager($db->getConnection());
-
-        $kptb = new Koppeltabel($db->getConnection());
-
-        
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $gameManager->fileUpload($_FILES['image']);
+         
 
-            $gameManager->insert($_POST, $_FILES['image']['name']);
+            
         }  
     ?>
 
@@ -78,7 +81,7 @@
         <lable for='image'>Image: </lable>
         <input type='file' name='image'><br>
 
-        <input type='submit' name='submit' value="Versturen">
+        <input type='submit' name='add-game' value="Versturen">
     </form>
 
     
@@ -98,6 +101,7 @@
 
     <form method="post">
         <input type="submit" name='logout' value="Logout">
+        <input type='submit' name='userDelete' value="Verwijder Gebruiker">
     </form>
 
     <script src='javascript.js'></script>

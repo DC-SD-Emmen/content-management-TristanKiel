@@ -63,6 +63,12 @@
             
         }
 
+        
+        public function deleteUsers($id){
+            $stmt = $this->conn->prepare("DELETE FROM users WHERE id=$id");
+            $stmt->execute();
+        }
+
     }
 
 ?>
