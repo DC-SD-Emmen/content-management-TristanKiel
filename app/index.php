@@ -30,8 +30,6 @@
     if (!isset($_SESSION['username'])) {
         session_destroy();
         header("Location: inlog.php");
-    } else {
-        echo "Hallo " . $_SESSION['username'] . "!<br>";
     }
 ?>
 <!DOCTYPE html>
