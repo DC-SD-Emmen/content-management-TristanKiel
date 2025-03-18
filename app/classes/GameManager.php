@@ -47,26 +47,14 @@
                 $genre = htmlspecialchars($data['genre']);
                 $platform = htmlspecialchars($data['platform']);
                 $release_year = htmlspecialchars($data['release_year']);
-                $rating = htmlspecialchars($data['rating']);
-                
-
-
-                //met regex controleren input
-               
-
-                    //data ophalen
-                    $title = htmlentities($_POST['title']);
-                    $genre = htmlentities($_POST['genre']);
-                    $platform = htmlentities($_POST['platform']);
-                    $release_year = htmlentities($_POST['release_year']);
-                    $rating = htmlentities($_POST['rating']);
-                   
+                $rating = htmlspecialchars($data['rating']);                   
 
                     //regex controle
 
-                    $titleRegex = '/[A-Z][a-z]* ?([A-Z][a-z]*|[1-9])/';
-                    $genreRegex = '/[A-Z][a-z]*/';
-                    $platformRegex = '/[A-Z][a-z]* ?[1-9]?/';
+                    $titleRegex = '/^[A-Za-z0-9 ]+$/';   // Letters, cijfers en spaties toegestaan
+                    $genreRegex = '/^[A-Za-z ]+$/';      // Alleen letters en spaties
+                    $platformRegex = '/^[A-Za-z0-9 ]+$/'; // Letters, cijfers en spaties
+                    
 
                     // als de match niet goed is
                     if(!preg_match($titleRegex, $title)) {
@@ -78,35 +66,20 @@
                     elseif(!preg_match($platformRegex, $platform)) {
                         echo "Platform is niet goed";
                     }
-                    elseif($rating < 1 && $rating > 10){
+                    elseif($rating < 1 || $rating > 10){
                         echo "Rating is niet goed<br>";
                         echo "voer een rating in tussen de 1 en de 10";
                     }
-                    else {
-                        $GameManager = new GameManager();
-                        $GameManager->setTitle($title) ;
-                        $GameManager->setGenre($genre);
-                        $GameManager->setPlatform($platform);
-                        $GameManager->setRelease_year($release_year);
-                        $GameManager->setRating($rating);
-                        $GameManager->setImage($imageName);
-                    }
-
-            
 
                 try {
-                    $stmt = $this->conn->prepare("INSERT INTO games (title, genre, platform, release_year, rating, image) VALUES ('$title', '$genre', '$platform', '$release_year', '$rating', '$imageName')");
+                    $stmt = $this->conn->prepare("INSERT INTO games (title, genre, platform, release_year, rating, image) VALUES (:title, :genre, :platform, :release_year, :rating, :imageName)");
                     $stmt->bindParam(':title', $title);
                     $stmt->bindParam(':genre', $genre);
                     $stmt->bindParam(':platform', $platform);
                     $stmt->bindParam(':release_year', $release_year);
                     $stmt->bindParam(':rating', $rating);
-                    $stmt->bindParam(':image', $imageName);
+                    $stmt->bindParam(':imageName', $imageName);
                     $stmt->execute();
-
-                    // use exec() because no results are returned
-
-                    $this->conn->exec($sql);
                     echo "New data created succesfully";
                 }
                         
