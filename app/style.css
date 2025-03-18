@@ -93,6 +93,14 @@ button:hover {
     font-weight: bold;
 }
 
+a {
+    color: aqua;
+}
+
+a:hover {
+    color: azure;
+}
+
 @media (max-width: 800px) {
     form {
         display: grid;

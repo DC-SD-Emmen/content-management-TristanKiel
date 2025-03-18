@@ -23,9 +23,6 @@
             }
         }
 
-        
-
-
         public function insertUser($user, $password) {
             //regex controle doen
             //htmlspecials eventueel toepassen waar nodig
@@ -50,8 +47,6 @@
             }
         }
 
-
-
         public function getUser($username){
 
             $stmt = $this->conn->prepare ("SELECT * FROM users WHERE username = :username");
@@ -70,6 +65,22 @@
             $stmt = $this->conn->prepare("DELETE FROM users WHERE id = :id");
             $stmt->bindParam(':id', $id);
             $stmt->execute();
+        }
+
+        public function addToWishList($user_id, $game_id) {
+
+            try {
+                $stmt = $this->conn->prepare("INSERT INTO user_games (user_id, game_id) VALUES (:user_id, :game_id)");
+                $stmt->bindParam(':user_id', $user_id);
+                $stmt->bindParam(':game_id', $game_id);
+                $stmt->execute();
+
+                echo "Game is succesvol toegevoegd aan wishlist!";
+            }   
+            catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+
         }
     }
 ?>

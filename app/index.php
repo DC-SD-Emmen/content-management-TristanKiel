@@ -45,20 +45,9 @@
 <body>
 
     <h1>Game Library</h1>
+
+    <a href="wishlist.php">Link naar wishlist</a><br>
     
-    <?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-         
-
-            
-        }  
-    ?>
-
-    <form action="wishlist.php" method="post">
-        <input type="submit" name='wishlist' value="Wensenlijst">
-    </form>
-
     <button id='add-button'>ADD</button>
 
     <form id='gameForm' method="POST" enctype="multipart/form-data" style='display: none;'>

@@ -97,13 +97,13 @@
                 try {
                     $sql = "INSERT INTO games (title, genre, platform, release_year, rating, image)
                     VALUES ('$title', '$genre', '$platform', '$release_year', '$rating', '$imageName')";
-                    $stmt->bindParam(':title', $title);
-                    $stmt->bindParam(':genre', $genre);
-                    $stmt->bindParam(':platform', $platform);
-                    $stmt->bindParam(':release_year', $release_year);
-                    $stmt->bindParam(':rating', $rating);
-                    $stmt->bindParam(':image', $imageName);
-                    $stmt->execute();
+                    $sql->bindParam(':title', $title);
+                    $sql->bindParam(':genre', $genre);
+                    $sql->bindParam(':platform', $platform);
+                    $sql->bindParam(':release_year', $release_year);
+                    $sql->bindParam(':rating', $rating);
+                    $sql->bindParam(':image', $imageName);
+                    $sql->execute();
 
                     // use exec() because no results are returned
 
@@ -163,6 +163,14 @@
                 echo "Sorry, there was an error uploading your file.";
             }
             }
+        }
+        public function deleteGames($id){
+            $stmt = $this->conn->prepare("DELETE FROM user_games WHERE game_id = :game_id");
+            $stmt->bindParam(':game_id', $id);
+            $stmt->execute();
+            $stmt = $this->conn->prepare("DELETE FROM games WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
         }
 
     }
