@@ -22,8 +22,11 @@
 
 
         }
-        if(isset($_POST['gameDelete'])){
-            $gameManager->deleteGames();
+
+        if(isset($_POST['gameDelete'])) {
+            $game_id = $_POST['game_id'];
+            $gameManager->deleteGames($game_id);
+            header("Location: index.php");
         }
     }
 
