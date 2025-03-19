@@ -1,24 +1,24 @@
 <?php
-    session_start();
-
+    // alle bestanden worden ingeladen
     spl_autoload_register(function ($class_name) {
         include './classes/' . $class_name . '.php';
     });
+    session_start();
 
     $db = new Database();   
     $userManager = new UserManager($db->getConnection());
     $gameManager = new GameManager($db->getConnection());
     $kptb = new Koppeltabel($db->getConnection());
-
+    //als er een formulier wordt gepost
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+        //als er op de submit knop wordt geklikt
         if(isset($_POST['logout'])) {
             session_unset();
             session_destroy();
             header("Location: inlog.php");
         } 
         else if(isset($_POST['userDelete'])){
-            $userManager->deleteUsers($_SESSION['userid']);
+            $userManager->deleteUsers($_SESSION['user']->getUserID());
             header("Location: inlog.php");
         } 
         else if(isset($_POST['add-game'])) {
@@ -76,7 +76,7 @@
     <div id='games-container'>
 
         <?php
-            $games = $gameManager->selectAll($_SESSION['userid']);
+            $games = $gameManager->selectAll($_SESSION['user']->getUserID());
 
             foreach($games as $game) {
                 echo "<a href='detailpagina.php?id=" . $game['id'] ."'> <img class='game-image' src='uploads/" . $game['image'] . "'></a><br>";

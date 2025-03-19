@@ -1,24 +1,25 @@
 <?php
-    session_start();
+
 
     spl_autoload_register(function ($class_name) {
         include './classes/' . $class_name . '.php';
     });
+
+    session_start();
 
     $db = new Database();
     $userManager = new UserManager($db->getConnection());
     
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        //if isset register, betekend Als er op de register submit knop is gedrukt
+        //if isset register betekent Als er op een submit knop is gedrukt
         if(isset($_POST['register'])) {
             $user = $_POST['uname'];
             $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
             
-            //usermanager->insertUser oproepen
+            //usermanager->insertUser roept functie insertUser aan
             $userManager->insertUser($user, $password);
         }
-        
     }
 ?>
 

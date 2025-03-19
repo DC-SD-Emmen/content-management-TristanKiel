@@ -1,9 +1,11 @@
 <?php
-    session_start();
+
 
     spl_autoload_register(function ($class_name) {
         include './classes/' . $class_name . '.php';
     });
+
+    session_start();
 
     $db = new Database();
     $userManager = new UserManager($db->getConnection());
@@ -23,10 +25,10 @@
             if ($user && isset($user['password'])) { 
                 if(password_verify($password, $user['password'])) {
 
-                    $_SESSION['username'] = $userName;
-                    $_SESSION['userid'] = $user['id'];
+                    $_SESSION['user'] = new User($user['id'], $userName);
 
                     header('Location: index.php');
+                    
                 } else {
                     echo "Login not succesfull! try again";
                 }

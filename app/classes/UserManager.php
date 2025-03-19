@@ -4,11 +4,11 @@
     class UserManager {
 
         private $conn;
-
+        // functie construct wordt automatisch uitgevoerd
         public function __construct($db){ 
             $this->conn = $db;   
         }
-
+        // selectAll haalt alle data van alle users op
         public function selectAll(){
             try {
                 $stmt = $this->conn->prepare("SELECT * FROM users");
@@ -22,10 +22,10 @@
                 $resultaten = [];
             }
         }
-
+        // insertUser haalt stuurt één user naar de database
         public function insertUser($user, $password) {
-            //regex controle doen
-            //htmlspecials eventueel toepassen waar nodig
+            //regex controle en specialchars
+
             $username = htmlspecialchars($user);
 
             $usernameregex = '/[A-Z][a-z]*/';
@@ -46,7 +46,7 @@
                 echo $e->getMessage();
             }
         }
-
+        // haalt data van één gebruiker op
         public function getUser($username){
 
             $stmt = $this->conn->prepare ("SELECT * FROM users WHERE username = :username");
@@ -57,7 +57,7 @@
             return $user ?: null; // Return null if no user found
             
         }
-        
+        // deleteUsers verwijdert een gebruiker
         public function deleteUsers($id){
             $stmt = $this->conn->prepare("DELETE FROM user_games WHERE user_id = :user_id");
             $stmt->bindParam(':user_id', $id);
@@ -66,7 +66,7 @@
             $stmt->bindParam(':id', $id);
             $stmt->execute();
         }
-
+        // addToWishList zorgt dat je games naar jouw wishlist kan sturen
         public function addToWishList($user_id, $game_id) {
 
             try {

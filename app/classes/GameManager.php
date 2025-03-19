@@ -4,11 +4,11 @@
 
         private $conn;
 
-
+        // wordt automatisch uitgevoerd
         public function __construct($conn) {
             $this->conn = $conn;
         }
-
+        // haalt alle games op
         public function selectAll() {
         
             try {
@@ -23,7 +23,7 @@
                 $resultaten = [];
             }
         }
-
+        // haalt alle data uit één game op
         public function selectSingleGame($id) {
         
             try {
@@ -38,7 +38,7 @@
                 $resultaten = [];
             }
         }
-        
+        // stuurt data naar database
         public function insert($data, $imageName) {
                 // set the PDO error mode to exception
 
@@ -70,7 +70,7 @@
                         echo "Rating is niet goed<br>";
                         echo "voer een rating in tussen de 1 en de 10";
                     }
-
+                    // bindparams tegen SQL-injectie's
                 try {
                     $stmt = $this->conn->prepare("INSERT INTO games (title, genre, platform, release_year, rating, image) VALUES (:title, :genre, :platform, :release_year, :rating, :imageName)");
                     $stmt->bindParam(':title', $title);
@@ -136,6 +136,7 @@
             }
             }
         }
+        // verwijdert games
         public function deleteGames($id){
             $stmt = $this->conn->prepare("DELETE FROM user_games WHERE game_id = :game_id");
             $stmt->bindParam(':game_id', $id);

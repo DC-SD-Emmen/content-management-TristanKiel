@@ -1,10 +1,10 @@
 <?php
 
-    session_start();
-
     spl_autoload_register(function ($class_name) {
         include './classes/' . $class_name . '.php';
     });
+
+    session_start();
 
 ?>
 
@@ -26,10 +26,10 @@
 
         $kptb = new Koppeltabel($db->getConnection());
 
-        $games = $kptb->selectGames($_SESSION['userid']);
+        $games = $kptb->selectGames($_SESSION['user']->getUserID());
 
         foreach($games as $game) {
-            echo "<a href='detailpagina.php?id=" . $game['id'] ."'> <img class='game-image' src='uploads/" . $game['image'] . "'></a><br>";
+            echo "<a href='detailpagina.php?id=" . $game->getGameId() ."'> <img class='game-image' src='uploads/" . $game->getImage() . "'></a><br>";
         }
     ?>
 

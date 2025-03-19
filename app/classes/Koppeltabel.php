@@ -1,5 +1,5 @@
 <?php
-
+    // zorgt voor koppeling tussen gebruikers en games
     class Koppeltabel {
 
         private $conn;
@@ -23,7 +23,13 @@
             $stmt->execute();
             $resultaten = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $resultaten = $stmt->fetchALl();
-            return $resultaten;
+
+            $games = [];
+            foreach($resultaten as $resultaat) {
+                $game = new Game($resultaat['id'], $resultaat['game_id'], $resultaat['title'], $resultaat['genre'], $resultaat['platform'], $resultaat['release_year'], $resultaat['rating'], $resultaat['image']);
+                array_push($games, $game);
+            }
+            return $games;
         }
 
         public function selectUsers($game_id){

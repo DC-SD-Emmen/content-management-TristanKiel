@@ -1,9 +1,11 @@
 <?php
-    session_start();
-    //spl autoloader
+
+    // alle bestanden worden ingeladen
     spl_autoload_register(function ($class_name) {
         include 'classes/' . $class_name . '.php';
     });
+
+    session_start();
 
     $db = new Database();
     $gameManager = new GameManager($db->getConnection());
@@ -12,10 +14,10 @@
     //als er een formulier wordt gepost
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        //als er op de submit knop 'wistlist' wordt geklikt
+        //als er op de submit knop wordt geklikt
         if(isset($_POST['wishlist'])) {
 
-            $user_id = $_SESSION['userid'];
+            $user_id = $_SESSION['user']->getUserID();
             $game_id = $_POST['game_id'];
 
             $userManager->addToWishList($user_id, $game_id);
