@@ -66,6 +66,9 @@
 
     ?>
 
+    <form action="index.php" method="post">
+        <input type="submit" name="index" value="Terug naar index">
+    </form>  
     
 </body>
 </html>

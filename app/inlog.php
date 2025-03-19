@@ -22,6 +22,8 @@
             //user ophalen uit de database
             $user = $userManager->getUser($userName);
 
+
+
             if ($user && isset($user['password'])) { 
                 if(password_verify($password, $user['password'])) {
 

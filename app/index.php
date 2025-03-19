@@ -3,6 +3,7 @@
     spl_autoload_register(function ($class_name) {
         include './classes/' . $class_name . '.php';
     });
+
     session_start();
 
     $db = new Database();   
@@ -27,7 +28,7 @@
         }
     }
     
-    if (!isset($_SESSION['username'])) {
+    if (!isset($_SESSION['user'])) {
         session_destroy();
         header("Location: inlog.php");
     }
